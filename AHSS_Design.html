@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AHSS Metallurgical Design Map</title>
+<style>
+  :root{
+    /* Light theme palette */
+    --bg:#f7f8fb;
+    --card:#ffffff;
+    --ink:#1f2633;
+    --muted:#5b6b84;
+    --grid:#dbe2ee;
+
+    /* Cell statuses */
+    --pos:#e9f8ea;     /* beneficial (green) */
+    --pos2:#d5f3d6;    /* strong beneficial */
+    --neg:#ffe3e3;     /* detrimental (red) */
+    --neg2:#ffd0d0;    /* strong detrimental */
+    --mix:#ffeecf;     /* mixed (orange) */
+    --neu:#fff9cf;     /* neutral (yellow) */
+
+    --thead:#eef3fb;   /* header background */
+  }
+
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";}
+  .wrap{max-width:1800px;margin:32px auto;padding:0 16px;}
+  h1{font-size:clamp(22px,3vw,34px);margin:0 0 10px;}
+  p.sub{color:var(--muted);margin:0 0 18px;font-size:14px}
+
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 18px}
+  .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--grid);
+        background:var(--card);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+  .sw{width:14px;height:14px;border-radius:4px;border:1px solid var(--grid)}
+  .sw.pos {background:var(--pos)}
+  .sw.pos2{background:var(--pos2)}
+  .sw.neg {background:var(--neg)}
+  .sw.neg2{background:var(--neg2)}
+  .sw.mix {background:var(--mix)}
+  .sw.neu {background:var(--neu)}
+
+  .tbl-wrap{background:var(--card);border:1px solid var(--grid);border-radius:14px;overflow:auto;
+            box-shadow:0 6px 24px rgba(0,0,0,.06)}
+  table{border-collapse:separate;border-spacing:0;min-width:1200px;width:100%}
+  thead th{position:sticky;top:0;background:var(--thead);color:#1b2230;text-align:center;
+           font-weight:700;font-size:14px;z-index:2;border-bottom:1px solid var(--grid)}
+  th, td{border-bottom:1px solid var(--grid);padding:10px 12px;vertical-align:top;font-size:13px}
+  tbody tr:nth-child(even) td{background:#fafbfd}
+  td, th{border-right:1px solid var(--grid);}
+  td:last-child, th:last-child{border-right:none}
+  .knob{font-weight:600}
+  .note{color:var(--muted);font-size:13px}
+
+  /* Color tags for cells */
+  tbody tr td.pos  {background:var(--pos) !important}
+  tbody tr td.pos2 {background:var(--pos2) !important}
+  tbody tr td.neg  {background:var(--neg) !important}
+  tbody tr td.neg2 {background:var(--neg2) !important}
+  tbody tr td.mix  {background:var(--mix) !important}
+  tbody tr td.neu  {background:var(--neu) !important}
+
+  .hint{color:var(--muted);font-size:12px;margin:8px 0 0}
+
+  @media print{
+    body{background:white;color:black}
+    .wrap{max-width:none;margin:0;padding:0}
+    .tbl-wrap{box-shadow:none;border-color:#ccc}
+    thead th{background:#f2f2f2;color:#000}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Advanced High-Strength Steels (AHSS) — Metallurgical Design Map</h1>
+    <p class="sub">Effects of common design levers on Work of Fracture (WoF), Hole Expansion Capacity (HEC), grain size, inclusion population, and phase hardness gradient.</p>
+
+    <div class="legend">
+      <span class="chip"><span class="sw pos2"></span>Strong beneficial</span>
+      <span class="chip"><span class="sw pos"></span>Beneficial</span>
+      <span class="chip"><span class="sw neu"></span>Neutral</span>
+      <span class="chip"><span class="sw mix"></span>Mixed / context</span>
+      <span class="chip"><span class="sw neg"></span>Detrimental</span>
+      <span class="chip"><span class="sw neg2"></span>Strong detrimental</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="min-width:200px">Design knob / lever</th>
+            <th style="min-width:210px">Primary function</th>
+            <th style="min-width:180px">Work of Fracture (WoF)</th>
+            <th style="min-width:180px">Hole Expansion (HEC)</th>
+            <th style="min-width:130px">Grain size</th>
+            <th style="min-width:180px">Inclusions / particles</th>
+            <th style="min-width:190px">Phase hardness gradient</th>
+            <th style="min-width:260px">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="knob">Promote ferrite → bainite (↑ cooling rate)</td>
+            <td>Bainitic strengthening</td>
+            <td class="mix">↑ if fine lower bainite; ↓ if coarse/upper bainite or carbide films</td>
+            <td class="neg">↔ / ↓ (higher base hardness & mismatch)</td>
+            <td class="pos">↓ (refined substructure)</td>
+            <td class="neu">↔</td>
+            <td class="neg">↑</td>
+            <td class="note">Aim for fine, acicular bainite; avoid banding.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Promote multi-phase (DP / CP / TRIP / Q&amp;P)</td>
+            <td>Composite hard/soft phases</td>
+            <td class="pos">↑ (distributed damage, crack deflection; TRIP possible)</td>
+            <td class="mix">↓ if continuous martensite; ↑ if tempered &amp; fine</td>
+            <td class="pos">↓</td>
+            <td class="neu">↔</td>
+            <td class="neg2">↑↑</td>
+            <td class="note">Balance martensite morphology; stabilize film-type RA.</td>
+          </tr>
+
+           <!-- Transition row: DP → CP -->
+           <tr>
+            <td class="knob">Transition: <b>DP → CP</b></td>
+            <td>Replace ferrite with bainite; temper M; add RA</td>
+            <td class="pos">↑ (damage initiation delayed; TRIP toughening)</td>
+            <td class="pos">↑ (lower mismatch at edge)</td>
+            <td class="pos">↓ (finer laths)</td>
+            <td class="neu">↔</td>
+            <td class="pos">↓ (hardness gradient drops)</td>
+            <td class="note">Smoother contrast → less localization; crack path more tortuous.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Grain refinement (TMCP, Nb, Ti, V)</td>
+            <td>Increase boundary density; Hall–Petch</td>
+            <td class="pos2">↑↑</td>
+            <td class="pos">↑</td>
+            <td class="pos2">↓↓</td>
+            <td class="neu">↔</td>
+            <td class="pos">↓</td>
+            <td class="note">Low-regret lever for strength + toughness.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Microalloy precipitation (NbC, TiC, VC)</td>
+            <td>Precipitation strengthening &amp; pinning</td>
+            <td class="mix">↑ if nano; ↓ if coarse</td>
+            <td class="mix">↑ if fine; ↓ if clustered/coarse</td>
+            <td class="pos">↓</td>
+            <td class="pos">↑ (fine nano-carbides)</td>
+            <td class="neu">↔</td>
+            <td class="note">Avoid coarse TiN; control aging.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Coarse inclusions (TiN, Al<sub>2</sub>O<sub>3</sub>, MnS)</td>
+            <td>Void nucleation sites</td>
+            <td class="neg2">↓↓</td>
+            <td class="neg2">↓↓</td>
+            <td class="neu">↔</td>
+            <td class="neg2">↑↑ (coarse population)</td>
+            <td class="neu">↔</td>
+            <td class="note">Primary cause of edge cracking; minimize &amp; globularize.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Thermomechanical processing (schedule + cooling)</td>
+            <td>Refine &amp; homogenize</td>
+            <td class="pos">↑</td>
+            <td class="pos">↑</td>
+            <td class="pos2">↓↓</td>
+            <td class="pos">↓ (clean practice)</td>
+            <td class="pos">↓</td>
+            <td class="note">Industrial workhorse to tune uniformity.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Tempering / Partitioning (Q&amp;P-like)</td>
+            <td>Soften M, stabilize RA</td>
+            <td class="pos">↑</td>
+            <td class="pos">↑</td>
+            <td class="neu">↔</td>
+            <td class="neu">↔</td>
+            <td class="pos">↓ (mismatch reduced)</td>
+            <td class="note">Recovers HEC in high-M steels.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Retained austenite stability (TRIP)</td>
+            <td>Delayed transformation during strain</td>
+            <td class="pos2">↑↑</td>
+            <td class="pos">↑</td>
+            <td class="neu">↔</td>
+            <td class="neu">↔</td>
+            <td class="pos">↓</td>
+            <td class="note">Film-type RA good; blocky RA harmful.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Banding control (Mn/Si segregation)</td>
+            <td>Microstructural uniformity</td>
+            <td class="pos">↑</td>
+            <td class="pos2">↑↑</td>
+            <td class="neu">↔</td>
+            <td class="neu">↔</td>
+            <td class="pos">↓</td>
+            <td class="note">Hidden swing factor for HEC.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Ti addition (TiN/TiC)</td>
+            <td>Grain pinning, N fixation</td>
+            <td class="mix">↑ if fine TiC; ↓ if coarse TiN</td>
+            <td class="neg">↓ (coarse TiN → edge cracks)</td>
+            <td class="pos">↓ (pinned austenite)</td>
+            <td class="neg2">↑↑ (large, stable TiN)</td>
+            <td class="neu">↔</td>
+            <td class="note">Common in HSLA; manage TiN size carefully.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Nb addition</td>
+            <td>Delay recryst.; refine ferrite</td>
+            <td class="pos">↑</td>
+            <td class="pos">↑</td>
+            <td class="pos">↓</td>
+            <td class="neu">↔</td>
+            <td class="neu">↔</td>
+            <td class="note">Synergistic with V.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">V addition</td>
+            <td>Nano-carbide strengthening</td>
+            <td class="mix">↑ if nano; ↓ if coarse</td>
+            <td class="mix">↔ / ↓ when over-aged</td>
+            <td class="pos">↓</td>
+            <td class="pos">↑ (fine precipitates)</td>
+            <td class="neu">↔</td>
+            <td class="note">Avoid coarse V-rich carbides at edges.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Mn content</td>
+            <td>Hardenability</td>
+            <td class="neg">↓ if excessive (banding)</td>
+            <td class="neg">↓ (segregation-driven)</td>
+            <td class="neu">↔</td>
+            <td class="neg">↑ (segregation bands)</td>
+            <td class="neg">↑</td>
+            <td class="note">Keep moderate; control banding.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Ni addition</td>
+            <td>Austenite stabilizer, DBTT↓</td>
+            <td class="pos2">↑↑</td>
+            <td class="neg">↓ (more hard phase at edge; mismatch)</td>
+            <td class="neu">↔</td>
+            <td class="neu">↔</td>
+            <td class="neg">↑</td>
+            <td class="note">Boosts WoF; often penalizes HEC.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Cr addition</td>
+            <td>Refine bainite; tempering resistance</td>
+            <td class="pos">↑</td>
+            <td class="mix">↔ / slight ↓</td>
+            <td class="pos">↓</td>
+            <td class="neu">↔</td>
+            <td class="neg">↑ (but finer)</td>
+            <td class="note">Balanced 0.5–1% usually helpful.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Mo addition</td>
+            <td>Temper resistance; packets finer</td>
+            <td class="pos">↑</td>
+            <td class="neg">↓</td>
+            <td class="pos">↓</td>
+            <td class="neu">↔</td>
+            <td class="neg">↑</td>
+            <td class="note">Used for very high strength levels.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Al deoxidation (Al-killed)</td>
+            <td>Clean steel; N binding</td>
+            <td class="pos">↑</td>
+            <td class="pos">↑</td>
+            <td class="neu">↔</td>
+            <td class="pos">↓ (fine Al<sub>2</sub>O<sub>3</sub>)</td>
+            <td class="neu">↔</td>
+            <td class="note">Also reduces coarse TiN formation.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Coiling temperature (hot-rolled)</td>
+            <td>Ferrite vs bainite balance</td>
+            <td class="mix">↑ if refined bainite; ↓ if too hard martensite</td>
+            <td class="mix">↑ if warm coiling; ↓ if cold (hard rim)</td>
+            <td class="neu">↔</td>
+            <td class="neu">↔</td>
+            <td class="mix">↑ / ↓ (depends on phase mix)</td>
+            <td class="note">Crucial tuning knob on HR lines.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Inclusion engineering (Ca-treatment)</td>
+            <td>Globularize MnS</td>
+            <td class="pos">↑</td>
+            <td class="pos2">↑↑</td>
+            <td class="neu">↔</td>
+            <td class="pos">↓ (globular, benign)</td>
+            <td class="neu">↔</td>
+            <td class="note">Large HEC improvement for little alloy cost.</td>
+          </tr>
+
+          <tr>
+            <td class="knob">Overall strength target (UTS)</td>
+            <td>Total hardening level</td>
+            <td class="neg">↓ if too high (early localization)</td>
+            <td class="neg">↓</td>
+            <td class="neu">↔</td>
+            <td class="neu">↔</td>
+            <td class="neg">↑</td>
+            <td class="note">Temper/partition or add RA to compensate.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
+
